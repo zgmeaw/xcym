@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AW-Create - 专业编码定制项目服务</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="description" content="专业的编程代码定制项目服务，提供全栈开发、毕设范例、写作等服务">
+    <meta name="keywords" content="编程代码,定制项目,毕设">
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 颜色变量 */
+        :root {
+            --primary-color: #FF6B00;
+            --secondary-color: #07c160;
+            --text-color: #FFFFFF;
+            --light-text: #CCCCCC;
+            --background-color: #000000;
+            --dark-bg: #111111;
+            --border-color: #333333;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .order-btn a {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255,107,0,0.3);
+        }
+
+        /* 主横幅样式 */
+        .hero {
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            background-color: var(--background-color);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            background: linear-gradient(45deg, #FF6B00, #FF9500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            margin-top: 5rem;
+        }
+
+        .hero p {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #FF6B00, #FF9500);
+            border: none;
+            padding: 1.2rem 2.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            transition: transform 0.6s;
+            pointer-events: none;
+        }
+
+        .cta-button:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255,107,0,0.3);
+        }
+
+        /* 部分样式 */
+        .section {
+            padding: 4rem 5%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 为不同section添加不同的延迟 */
+        #why-us.fade-in {
+            transition-delay: 0.2s;
+        }
+
+        #languages.fade-in {
+            transition-delay: 0.3s;
+        }
+
+        #projects.fade-in {
+            transition-delay: 0.3s;
+        }
+
+        #pricing.fade-in {
+            transition-delay: 0.5s;
+        }
+
+        #contact.fade-in {
+            transition-delay: 0.6s;
+        }
+
+        .section h2 {
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        /* 特性网格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            box-shadow: inset 0 0 15px rgba(255,107,0,0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+            box-shadow: 0 10px 30px rgba(255,107,0,0.2);
+        }
+
+        .feature-card i {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--text-color);
+            margin: 1rem 0;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ================== 项目展示模块修复 ================== */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        #projects p{
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0.5;
+        }
+
+        /* 修复图片容器问题 */
+        .project-image {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-top: 56.25%; /* 16:9 宽高比 */
+            overflow: hidden;
+            border-radius: 10px 10px 0 0;
+            background-color: #1a1a1a; /* 添加背景色 */
+        }
+
+        .image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            padding-bottom: 1.5rem;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255,107,0,0.2);
+            border-color: var(--primary-color);
+        }
+
+        .project-card h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin: 1.5rem;
+            text-align: center;
+        }
+
+        .project-card p {
+            color: var(--light-text);
+            margin: 0 1.5rem 1.5rem;
+            line-height: 1.6;
+            text-align: center;
+            min-height: 60px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin: 0 1.5rem 1.5rem;
+        }
+
+        .project-tags span {
+            background: rgba(255,107,0,0.1);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-tags span:hover {
+            background: var(--primary-color);
+            color: var(--text-color);
+            transform: translateY(-2px);
+        }
+
+        .view-project {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 1rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), #FF9500);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255,107,0,0.2);
+        }
+
+        .view-project:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,107,0,0.4);
+        }
+
+        .view-project::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            transition: transform 0.6s;
+            pointer-events: none;
+        }
+
+        .view-project:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .view-more-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+            
+            .project-card {
+                margin-bottom: 2rem;
+            }
+            
+            .project-card p {
+                min-height: auto;
+            }
+            
+            /* 解决懒加载问题 */
+            .project-image {
+                padding-top: 0;
+                height: 200px; /* 设置固定高度 */
+            }
+            
+            .project-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .project-card p {
+                font-size: 0.9rem;
+            }
+            
+            .project-tags span {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .project-image {
+                height: 180px; /* 更小的固定高度 */
+            }
+        }
+        
+        /* 价格卡片 */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            padding: 2rem;
+            text-align: center;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 1px solid rgba(255,107,0,0.1);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary-color);
+            position: relative;
+            background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+            border: 2px solid var(--primary-color);
+        }
+
+        .popular-tag {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            border-radius: 20px;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1.5rem 0;
+        }
+
+        #pricing h2{
+            text-align: center;
+            margin-bottom: 0rem;
+        }
+
+        #pricing p{
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0.5;
+        }
+
+        /* 联系表单 */
+        #contact h2{
+            text-align: center;
+            margin-bottom: 0rem;
+        }
+
+        #contact p{
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0.5;
+        }
+
+        #contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #contact-form input,
+        #contact-form textarea {
+            padding: 0.8rem;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 1px solid rgba(255,107,0,0.1);
+        }
+
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(255,107,0,0.3);
+            background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(255,107,0,0.2);
+        }
+
+        #contact-form button {
+            background: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255,107,0,0.3);
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: var(--dark-bg);
+            padding: 2rem 5%;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* 移动端菜单 */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                z-index: 1001;
+            }
+
+            .nav-links {
+                display: flex;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                max-height: 0;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                padding: 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                z-index: 1000;
+                border-bottom: 1px solid var(--border-color);
+                overflow: hidden;
+                transition: all 0.3s ease-in-out;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .nav-links.active {
+                max-height: 400px;
+                padding: 1rem;
+                opacity: 1;
+                visibility: visible;
+                gap: 1rem;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                transform: translateY(-20px);
+                opacity: 0;
+                transition: all 0.3s ease-in-out;
+                margin: 0;
+                padding: 0;
+            }
+
+            .nav-links.active li {
+                transform: translateY(0);
+                opacity: 1;
+                margin: 0.3rem 0;
+            }
+
+            .nav-links li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links li:nth-child(2) { transition-delay: 0.15s; }
+            .nav-links li:nth-child(3) { transition-delay: 0.2s; }
+            .nav-links li:nth-child(4) { transition-delay: 0.25s; }
+            .nav-links li:nth-child(5) { transition-delay: 0.3s; }
+
+            .nav-links:not(.active) li {
+                transition-delay: 0s;
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+
+            .nav-links a {
+                padding: 0.8rem;
+                width: 100%;
+                display: block;
+                transform: translateY(0);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                transform: translateY(-2px);
+            }
+
+            .order-btn {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+
+            .order-btn a {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .pricing-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 项目卡片效果增强 */
+        .project-card {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+        }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff8533;
+        }
+
+        /* 文字选中效果 */
+        ::selection {
+            background: var(--primary-color);
+            color: var(--text-color);
+        }
+
+        /* Logo样式优化 */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .logo img {
+                height: 32px;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* 编程语言区域样式优化 */
+        .language-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .language-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .language-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255,107,0,0.2);
+            border-color: var(--primary-color);
+        }
+
+        .language-item i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), #FF9500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .language-item span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .language-logos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+
+            .language-item {
+                padding: 1rem;
+            }
+
+            .language-item i {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* 图片展示框式 */
+        .image-showcase {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .image-showcase img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .image-showcase {
+                margin: 1rem auto;
+            }
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin: 1rem 0;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            line-height: 1.6;
+        }
+
+        /* 联系我们部分 */
+        #contact {
+            text-align: center;
+            padding: 4rem 5%;
+        }
+
+        #contact h2 {
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--primary-color), #FF9500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #contact p {
+            color: var(--light-text);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            min-width: 250px;
+            min-height: 350px;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255,107,0,0.2);
+            border-color: var(--primary-color);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item h3 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .contact-link:hover {
+            color: #fff;
+            background-color: var(--primary-color);
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .contact-item {
+                width: 100%;
+            }
+        }
+        
+        /* 懒加载占位符样式 */
+        .lazy-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        /* 加载动画 */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.6; }
+        }
+        
+        .pulse-animation {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-container">
+                <img src="./images/logo.png" alt="AW-Create Logo">
+                <span class="logo-text">AW-Create</span>
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="javascript:void(0)" onclick="window.location.href='index.html'">首页</a></li>
+            <li><a href="javascript:void(0)" onclick="document.querySelector('#languages').scrollIntoView({behavior: 'smooth'})">服务范围</a></li>
+            <li><a href="javascript:void(0)" onclick="document.querySelector('#projects').scrollIntoView({behavior: 'smooth'})">项目展示</a></li>
+            <li><a href="javascript:void(0)" onclick="document.querySelector('#contact').scrollIntoView({behavior: 'smooth'})">联系我们</a></li>
+            <li class="order-btn"><a href="javascript:void(0)" onclick="document.querySelector('#contact').scrollIntoView({behavior: 'smooth'})">立即下单</a></li>
+        </ul>
+    </nav>
+
+    <!-- 主横幅 -->
+    <header class="hero">
+        <h1>专业编码定制项目服务</h1>
+        <p>C#、ASP.NET、Python、JAVA、微信小程序、WEB（包含html5和vue）等等开发语言</p>
+        <p>毕设级全套服务，包括："开题报告范例定制、论文范例定制、毕设级项目定制、范文降重、远程环境部署、1V1解答难点、答辩辅导"</p>
+        <p>温馨提示：定制项目和范文仅用于买家自己使用或者学习，禁止用于任何非法违规活动，产生不良后果与本网站及本团队无关，下单即代表默认已知且同意规定。</p>
+        <div class="contact-buttons">
+            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">立即下单</button>
+        </div>
+        <br />
+        <p>我们将尽快回复您</p>
+    </header>
+
+    <!-- 图片展示框 -->
+    <div class="image-showcase">
+        <img src="https://pic1.imgdb.cn/item/686f059e58cb8da5c899485f.webp" alt="项目展示">
+    </div>
+
+    <!-- 为什么选择我们 -->
+    <section id="why-us" class="section">
+        <h2>为什么选择我们</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-code"></i>
+                <h3>全栈开发</h3>
+                <p>我们提供从前端—后端—数据库的完整项目，一次下单，完整项目全部交付。</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>多种编程语言可选</h3>
+                <p>我们的团队精通C#、ASP.NET、Python、JAVA、微信小程序、Web（包括HTML5、Vue等）。</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-pencil-ruler"></i>
+                <h3>全新私人定制</h3>
+                <p>我们杜绝使用老旧模板或者现成项目进行修改，我们每个项目都是根据你的主题全新开发，更符合现代化开发风格。</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-file-alt"></i>
+                <h3>范文降重</h3>
+                <p>我们包含范文编写和降重服务，检查报告不合格退费。</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-server"></i>
+                <h3>远程环境部署</h3>
+                <p>交付定制项目时，我们负责远程帮您部署项目所需环境，且直至正常运行项目。</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>答辩指导</h3>
+                <p>我们将竭尽全力为您答辩进行重点指导，助您为成功答辩一臂之力。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 编程语言 -->
+    <section id="languages" class="section">
+        <h2>可选的编程语言</h2>
+        <div class="language-logos">
+            <div class="language-item">
+                <i class="fas fa-code"></i>
+                <span>C#</span>
+            </div>
+            <div class="language-item">
+                <i class="fas fa-server"></i>
+                <span>ASP.NET</span>
+            </div>
+            <div class="language-item">
+                <i class="fab fa-python"></i>
+                <span>Python</span>
+            </div>
+            <div class="language-item">
+                <i class="fab fa-weixin"></i>
+                <span>微信小程序</span>
+            </div>
+            <div class="language-item">
+                <i class="fas fa-globe"></i>
+                <span>WEB开发</span>
+            </div>
+            <div class="language-item">
+                <i class="fab fa-html5"></i>
+                <span>HTML5</span>
+            </div>
+            <div class="language-item">
+                <i class="fab fa-css3-alt"></i>
+                <span>CSS</span>
+            </div>
+            <div class="language-item">
+                <i class="fab fa-vuejs"></i>
+                <span>VUE</span>
+            </div>
+            <div class="language-item">
+                <i class="fas fa-sync-alt"></i>
+                <span>JAVA</span>
+            </div>
+            <div class="language-item">
+                <i class="fas fa-database"></i>
+                <span>MySQL</span>
+            </div>
+            <div class="language-item">
+                <i class="fas fa-database"></i>
+                <span>SQL Server</span>
+            </div>
+            <div class="language-item">
+                <i class="fab fa-bootstrap"></i>
+                <span>Bootstrap 5</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目展示 -->
+    <section id="projects" class="section">
+        <h2>最近的项目</h2>
+        <p>为了保护用户隐私安全，演示视频部分未展示</p>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="image-container">
+                        <img src="https://pic1.imgdb.cn/item/686f067d58cb8da5c8994dd1.png" alt="景点旅游网站管理系统截图">
+                    </div>
+                </div>
+                <h3>景点旅游网站管理系统</h3>
+                <p>多地点、多景点在线展示，线上预约购票，地图导航等等功能</p>
+                <div class="project-tags">
+                    <span>JAVA</span>
+                    <span>VUE 3</span>
+                    <span>Spring Boot</span>
+                    <span>MySql</span>
+                </div>
+                <a href="projects.html" class="view-project">查看项目</a>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="image-container">
+                        <img src="https://pic1.imgdb.cn/item/686f060558cb8da5c8994b24.png" alt="宠物领养系统截图">
+                    </div>
+                </div>
+                <h3>宠物领养网站管理系统</h3>
+                <p>萌宠在线转让或领养，让每一个宠物都有一个家</p>
+                <div class="project-tags">
+                    <span>Python</span>
+                    <span>VUE 3</span>
+                    <span>Django</span>
+                    <span>MySql</span>
+                </div>
+                <a href="projects.html" class="view-project">查看项目</a>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="image-container">
+                        <img src="https://pic1.imgdb.cn/item/686f065858cb8da5c8994cfa.png" alt="基于Hadoop和Python技术的某地人口预测分析系统截图">
+                    </div>
+                </div>
+                <h3>大数据人口预测系统</h3>
+                <p>基于Hadoop和Python技术的某地人口预测分析系统</p>
+                <div class="project-tags">
+                    <span>Hadoop</span>
+                    <span>Python</span>
+                    <span>Hive</span>
+                    <span>Hive</span>
+                    <span>DataGear</span>
+                    <span>MySql</span>
+                </div>
+                <a href="projects.html" class="view-project">查看项目</a>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="image-container">
+                        <img src="https://pic1.imgdb.cn/item/686f06a658cb8da5c8994ddb.png" alt="农产品销售平台微信小程序系统截图">
+                    </div>
+                </div>
+                <h3>农产品销售平台微信小程序</h3>
+                <p>为农民伯伯提供简便的线上销售平台进行销售，为顾客提供源头购买渠道</p>
+                <div class="project-tags">
+                    <span>JAVA</span>
+                    <span>Spring Boot</span>
+                    <span>微信小程序开发</span>
+                    <span>MySql</span>
+                </div>
+                <a href="projects.html" class="view-project">查看项目</a>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="image-container">
+                        <img src="https://pic1.imgdb.cn/item/686f043158cb8da5c8993c9b.png" alt="民宿管理系统">
+                    </div>
+                </div>
+                <h3>民宿管理系统</h3>
+                <p>多用户模块，更符合逻辑流程的可上线级项目开发</p>
+                <div class="project-tags">
+                    <span>C#</span>
+                    <span>ASP.NET</span>
+                    <span>SQL Server</span>
+                </div>
+                <a href="projects.html" class="view-project">查看项目</a>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="image-container">
+                        <img src="https://pic1.imgdb.cn/item/686f05ab58cb8da5c89948b8.jpg" alt="ASP.NET医院管理系统截图">
+                    </div>
+                </div>
+                <h3>体检预约管理系统</h3>
+                <p>简约大气的预约挂号系统</p>
+                <br />
+                <div class="project-tags">
+                    <span>C#</span>
+                    <span>ASP.NET</span>
+                    <span>SQL Server</span>
+                </div>
+                <a href="projects.html" class="view-project">查看项目</a>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <a href="projects.html" class="view-project">查看更多项目</a>
+        </div>
+    </section>
+
+    <!-- 价格方案 -->
+    <section id="pricing" class="section">
+        <h2>我们的定价</h2>
+        <p>所有价格均为参考价，难度不一实际价格以咨询为准</p>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>期末设计级服务</h3>
+                <div class="price">
+                    <span class="original">参考价：</span>
+                    <span class="discounted">¥788</span>
+                </div>
+                <ul class="features-list">
+                    <li>基础功能实现</li>
+                    <li>简单数据库设计</li>
+                    <li>基础界面设计</li>
+                    <li>源码说明文档</li>
+                </ul>
+            </div>
+            <div class="pricing-card popular">
+                <div class="popular-tag">最受欢迎</div>
+                <h3>毕设级全包服务</h3>
+                <div class="price">
+                    <span class="original">参考价：</span>
+                    <span class="discounted">¥1588</span>
+                </div>
+                <ul class="features-list">
+                    <li>开题报告</li>
+                    <li>定制化开发毕设级</li>
+                    <li>论文检测不合格退费</li>
+                    <li>远程环境部署</li>
+                    <li>1V1辅导考点</li>
+                    <li>毕业答辩级辅导</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <h3>单毕设级项目服务</h3>
+                <div class="price">
+                    <span class="original">参考价：</span>
+                    <span class="discounted">¥988</span>
+                </div>
+                <ul class="features-list">
+                    <li>定制化开发</li>
+                    <li>高级功能实现</li>
+                    <li>专业UI设计</li>
+                    <li>完整技术文档</li>
+                    <li>远程部署服务</li>
+                    <li>一年免费维护</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系表单 -->
+    <section id="contact" class="section">
+        <h2>联系我们</h2>
+        <p>工作时间：周一至周日 9:00-22:00</p>
+        <div class="contact-container">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fab fa-weixin"></i>
+                </div>
+                <h3>微信咨询</h3>
+                <div class="wechat-container">
+                    <img src="images/wx.jpg" alt="微信二维码" class="qr-code protected">
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fab fa-qq"></i>
+                </div>
+                <h3>QQ咨询</h3>
+                <a href="https://qm.qq.com/q/Ftvo0hC86e" class="contact-link protect-content" target="_blank">立即联系</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy.html">隐私政策</a>
+                <a href="terms.html">服务条款</a>
+                <a href="about.html">关于我们</a>
+            </div>
+            <p>© 2025 AW-Create. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const sectionObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // 移动端导航栏
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            function toggleNav(event) {
+                event.stopPropagation();
+                navLinks.classList.toggle('active');
+            }
+
+            function closeNav() {
+                navLinks.classList.remove('active');
+            }
+
+            menuToggle.addEventListener('click', toggleNav);
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    closeNav();
+                });
+            });
+
+            navLinks.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+
+            document.addEventListener('click', closeNav);
+
+            document.addEventListener('contextmenu', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            });
+            
+            // 解决懒加载问题
+            const lazyImages = document.querySelectorAll('.project-image img');
+            
+            // 移动端加载图片
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                lazyImages.forEach(img => {
+                    // 确保图片加载
+                    if (!img.complete) {
+                        img.onload = function() {
+                            img.style.opacity = 1;
+                        };
+                        img.style.opacity = 0;
+                        img.src = img.src; // 重新触发加载
+                    }
+                });
+            }
+        });
+    </script>
+
+
+</body>
+</html>

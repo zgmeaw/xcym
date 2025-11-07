@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - AW-Create</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-container">
+                <img src="./images/logo.png" alt="AW-Create Logo">
+                <span class="logo-text">AW-Create</span>
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="javascript:void(0)" onclick="window.location.href='index.html'">首页</a></li>
+            <li><a href="javascript:void(0)" onclick="window.location.href='index.html#languages'">服务范围</a></li>
+            <li><a href="javascript:void(0)" onclick="window.location.href='index.html#projects'">项目展示</a></li>
+            <li><a href="javascript:void(0)" onclick="window.location.href='index.html#contact'">联系我们</a></li>
+            <li class="order-btn"><a href="javascript:void(0)" onclick="window.location.href='index.html#contact'">立即下单</a></li>
+        </ul>
+    </nav>
+
+    <!-- 页面内容 -->
+    <div class="page-content about-page">
+        <div class="page-header">
+            <h1>关于我们</h1>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="content-section company-intro">
+            <h2><i class="fas fa-building"></i> 团队简介</h2>
+            <p>AW-Create是一家专注于提供高质量编程和论文服务的技术团队。我们拥有专业的开发团队和丰富的项目经验，致力于为客户提供最优质的服务。</p>
+        </div>
+
+        <div class="content-section advantages">
+            <h2><i class="fas fa-star"></i> 我们的优势</h2>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <i class="fas fa-users"></i>
+                    <h3>专业的技术团队</h3>
+                    <p>拥有多年开发经验的技术专家，精通多种编程语言和框架。</p>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>丰富的项目经验</h3>
+                    <p>成功完成数百个项目，涵盖各个领域的开发需求。</p>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>完善的服务体系</h3>
+                    <p>从需求分析到项目交付，提供全程专业服务支持。</p>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>严格的质量把控</h3>
+                    <p>多重审核机制，确保交付成果的质量。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section contact-info">
+            <h2><i class="fas fa-clock"></i> 工作时间</h2>
+            <div class="work-hours">
+                <p><i class="far fa-calendar-alt"></i> 周一至周日</p>
+                <p><i class="far fa-clock"></i> 9:00-22:00</p>
+            </div>
+        </div>
+
+        <div class="content-section contact-section">
+            <h2><i class="fas fa-comments"></i> 联系方式</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fab fa-weixin"></i>
+                    <h3>微信咨询</h3>
+                    <img src="images/wx.jpg" alt="微信二维码" class="qr-code">
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-qq"></i>
+                    <h3>QQ咨询</h3>
+                    <a href="https://qm.qq.com/q/Ftvo0hC86e" target="_blank" class="contact-link">立即联系</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 移动端导航栏
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        // 切换导航栏状态
+        function toggleNav(event) {
+            event.stopPropagation(); // 阻止事件冒泡
+            navLinks.classList.toggle('active');
+        }
+
+        // 关闭导航栏
+        function closeNav() {
+            navLinks.classList.remove('active');
+        }
+
+        menuToggle.addEventListener('click', toggleNav);
+
+        // 点击导航链接后关闭菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                closeNav();
+            });
+        });
+
+        // 阻止导航菜单内的点击事件冒泡
+        navLinks.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+
+        // 点击页面任意位置关闭导航栏
+        document.addEventListener('click', closeNav);
+    });
+    </script>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy.html">隐私政策</a>
+                <a href="terms.html">服务条款</a>
+                <a href="about.html">关于我们</a>
+            </div>
+            <p>© 2025 AW-Create. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>项目展示 - 我们的作品</title>
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="css/projects.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<!-- Favicon设置 -->
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<div class="logo">
+				<div class="logo-container">
+					<img src="./images/logo.png" alt="AW-Create Logo">
+					<span class="logo-text">AW-Create</span>
+				</div>
+			</div>
+			<div class="menu-toggle">
+				<i class="fas fa-bars"></i>
+			</div>
+			<ul class="nav-links">
+				<li><a href="javascript:void(0)" onclick="window.location.href='index.html'">首页</a></li>
+				<li><a href="javascript:void(0)" onclick="window.location.href='index.html#languages'">服务范围</a></li>
+				<li><a href="javascript:void(0)" onclick="window.location.href='index.html#projects'">项目展示</a></li>
+				<li><a href="javascript:void(0)" onclick="window.location.href='index.html#contact'">联系我们</a></li>
+				<li class="order-btn"><a href="javascript:void(0)"
+						onclick="window.location.href='index.html#contact'">立即下单</a></li>
+			</ul>
+		</nav>
+
+		<!-- 项目展示页面 -->
+		<div class="projects-page">
+			<!-- 页面标题 -->
+			<div class="page-header">
+				<h1>项目展示</h1>
+				<p>以下是我们的一些优秀项目案例（客户需求和预算不同，制定功能复杂程度等等不一致）</p>
+				<div class="header-line"></div>
+			</div>
+
+			<!-- 项目网格 -->
+			<div class="projects-grid">
+				<!-- 项目卡片 1 -->
+				<div class="project-card">
+					<div class="project-image">
+						<div class="image-container">
+							<img src="images/sp1.png" alt="项目1截图">
+						</div>
+					</div>
+					<div class="project-content">
+						<h3>民宿管理系统</h3>
+						<p>多用户模块，更符合逻辑流程的可上线级项目开发</p>
+						<div class="project-tags">
+							<span>C#</span>
+							<span>ASP.NET</span>
+							<span>SQL Server</span>
+						</div>
+						<br />
+						<div class="video-section">
+							<button class="demo-btn" onclick="showVideo(1)">
+								<i class="fas fa-play-circle"></i> 演示视频
+							</button>
+							<div class="video-wrapper" id="video-wrapper-1" style="display: none;">
+								<video id="video-1" src="video/sl1.mp4" controls></video>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 项目卡片 2 -->
+				<div class="project-card">
+					<div class="project-image">
+						<div class="image-container">
+							<img src="images\宠物领养.png" alt="宠物领养系统截图">
+						</div>
+					</div>
+					<div class="project-content">
+						<h3>宠物领养网站管理系统</h3>
+						<p>萌宠在线转让或领养，让每一个宠物都有一个家</p>
+						<div class="project-tags">
+							<span>Python</span>
+							<span>VUE 3</span>
+							<span>Django</span>
+							<span>MySql</span>
+						</div>
+						<br />
+						<div class="video-section">
+							<button class="demo-btn" onclick="showVideo(2)">
+								<i class="fas fa-play-circle"></i> 演示视频
+							</button>
+							<div class="video-wrapper" id="video-wrapper-2" style="display: none;">
+								<video id="video-2" src="video/sl2.mp4" controls></video>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 项目卡片 3 -->
+				<div class="project-card">
+					<div class="project-image">
+						<div class="image-container">
+							<img src="images/旅游.png" alt="景点旅游网站管理系统截图">
+						</div>
+					</div>
+					<div class="project-content">
+						<h3>景点旅游网站管理系统</h3>
+						<p>多地点、多景点在线展示，线上预约购票，地图导航等等功能</p>
+						<div class="project-tags">
+							<span>JAVA</span>
+							<span>VUE 3</span>
+							<span>Spring Boot</span>
+							<span>MySql</span>
+						</div>
+						<br />
+						<div class="video-section">
+							<button class="demo-btn" onclick="showVideo(3)">
+								<i class="fas fa-play-circle"></i> 演示视频
+							</button>
+							<div class="video-wrapper" id="video-wrapper-3" style="display: none;">
+								<video id="video-3" src="video/sl3.mp4" controls></video>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 项目卡片 4 -->
+				<div class="project-card">
+					<div class="project-image">
+						<div class="image-container">
+							<img src="images/刺绣.png" alt="项目4截图">
+						</div>
+					</div>
+					<div class="project-content">
+						<h3>传统文化刺绣交流管理系统</h3>
+						<p>在线交流教学不同地区的刺绣技术和作品分享网站</p>
+						<br />
+						<div class="project-tags">
+							<span>JAVA</span>
+							<span>VUE 3</span>
+							<span>Spring Boot</span>
+							<span>MySql</span>
+						</div>
+						<br />
+						<div class="video-section">
+							<button class="demo-btn" onclick="showVideo(4)">
+								<i class="fas fa-play-circle"></i> 演示视频
+							</button>
+							<div class="video-wrapper" id="video-wrapper-4" style="display: none;">
+								<video id="video-4" src="video/sl4.mp4" controls></video>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 项目卡片 5 -->
+				<div class="project-card">
+					<div class="project-image">
+						<div class="image-container">
+							<img src="images\小程序.png" alt="农产品销售平台微信小程序系统截图">
+						</div>
+					</div>
+					<div class="project-content">
+						<h3>农产品销售平台微信小程序</h3>
+						<p>为农民伯伯提供简便的线上销售平台进行销售，为顾客提供源头购买渠道</p>
+						<div class="project-tags">
+							<span>JAVA</span>
+							<span>Spring Boot</span>
+							<span>微信小程序开发</span>
+							<span>MySql</span>
+						</div>
+						<div class="video-section">
+							<button class="demo-btn" onclick="showVideo(5)">
+								<i class="fas fa-play-circle"></i> 演示视频
+							</button>
+							<div class="video-wrapper" id="video-wrapper-5" style="display: none;">
+								<video id="video-5" src="video/sl5.mp4" controls></video>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 项目卡片 6 -->
+				<div class="project-card">
+					<div class="project-image">
+						<div class="image-container">
+							<img src="images\大数据.png" alt="基于Hadoop和Python技术的某地人口预测分析系统截图">
+						</div>
+					</div>
+					<div class="project-content">
+						<h3>大数据人口预测系统</h3>
+						<p>基于Hadoop和Python技术的某地人口预测分析系统</p>
+						<div class="project-tags">
+							<span>Hadoop</span>
+							<span>Python</span>
+							<span>Hive</span>
+							<span>Hive</span>
+							<span>DataGear</span>
+							<span>MySql</span>
+						</div>
+						<div class="video-section">
+							<button class="demo-btn" onclick="showVideo(6)">
+								<i class="fas fa-play-circle"></i> 演示视频
+							</button>
+							<div class="video-wrapper" id="video-wrapper-6" style="display: none;">
+								<video id="video-6" src="video/sl6.mp4" controls></video>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="project-card">
+					<div class="project-image">
+						<div class="image-container">
+							<img src="images/sp2.png" alt="项目2截图">
+						</div>
+					</div>
+					<div class="project-content">
+						<h3>体检预约管理系统</h3>
+						<p>简约大气的预约挂号系统</p>
+						<br />
+						<div class="project-tags">
+							<span>C#</span>
+							<span>ASP.NET</span>
+							<span>SQL Server</span>
+						</div>
+						<br />
+						<div class="video-section">
+							<button class="demo-btn" onclick="showVideo(7)">
+								<i class="fas fa-play-circle"></i> 演示视频
+							</button>
+							<div class="video-wrapper" id="video-wrapper-7" style="display: none;">
+								<video id="video-7" src="video/sl7.mp4" controls></video>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="project-card">
+					<div class="project-image">
+						<div class="image-container">
+							<img src="images\大数据2.png" alt="基于Hadoop分析气象数据预测及分析系统">
+						</div>
+					</div>
+					<div class="project-content">
+						<h3>大数据气象预测系统</h3>
+						<p>基于Hadoop分析气象数据预测及分析系统</p>
+						<div class="project-tags">
+							<span>Hadoop</span>
+							<span>Python</span>
+							<span>Hive</span>
+							<span>Hive</span>
+							<span>DataGear</span>
+							<span>MySql</span>
+						</div>
+						<div class="video-section">
+							<button class="demo-btn">
+								<i class="fas fa-play-circle"></i> 应客户要求隐藏视频
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<span class="view-project" style="margin-top: 50px;">更多项目正在进行中，暂未上传，敬请期待。。。</span>
+		</div>
+
+		<!-- 页脚 -->
+		<footer>
+			<div class="footer-content">
+				<div class="footer-links">
+					<a href="privacy.html">隐私政策</a>
+					<a href="terms.html">服务条款</a>
+					<a href="about.html">关于我们</a>
+				</div>
+				<p>© 2025 AW-Create. All rights reserved.</p>
+			</div>
+		</footer>
+
+		<script>
+			let currentVideoId = null;
+
+			function showVideo(id) {
+				const videoWrapper = document.getElementById(`video-wrapper-${id}`);
+				const video = document.getElementById(`video-${id}`);
+
+				// 如果点击的是当前正在播放的视频
+				if (currentVideoId === id) {
+					videoWrapper.style.display = 'none';
+					video.pause();
+					video.currentTime = 0;
+					currentVideoId = null;
+					return;
+				}
+
+				// 如果有其他视频在播放，先关闭它
+				if (currentVideoId) {
+					const currentWrapper = document.getElementById(`video-wrapper-${currentVideoId}`);
+					const currentVideo = document.getElementById(`video-${currentVideoId}`);
+					currentWrapper.style.display = 'none';
+					currentVideo.pause();
+					currentVideo.currentTime = 0;
+				}
+
+				// 显示并播放新的视频
+				videoWrapper.style.display = 'block';
+				video.play();
+				currentVideoId = id;
+
+				// 滚动到视频位置
+				videoWrapper.scrollIntoView({
+					behavior: 'smooth',
+					block: 'nearest'
+				});
+			}
+
+			// 当视频播放结束时，自动隐藏视频
+			document.querySelectorAll('video').forEach(video => {
+				video.addEventListener('ended', function() {
+					const wrapper = this.parentElement;
+					wrapper.style.display = 'none';
+					currentVideoId = null;
+				});
+			});
+
+			document.addEventListener('DOMContentLoaded', function() {
+				// 移动端导航栏
+				const menuToggle = document.querySelector('.menu-toggle');
+				const navLinks = document.querySelector('.nav-links');
+
+				// 切换导航栏状态
+				function toggleNav(event) {
+					event.stopPropagation(); // 阻止事件冒泡
+					navLinks.classList.toggle('active');
+				}
+
+				// 关闭导航栏
+				function closeNav() {
+					navLinks.classList.remove('active');
+				}
+
+				menuToggle.addEventListener('click', toggleNav);
+
+				// 点击导航链接后关闭菜单
+				document.querySelectorAll('.nav-links a').forEach(link => {
+					link.addEventListener('click', () => {
+						closeNav();
+					});
+				});
+
+				// 阻止导航菜单内的点击事件冒泡
+				navLinks.addEventListener('click', function(event) {
+					event.stopPropagation();
+				});
+
+				// 点击页面任意位置关闭导航栏
+				document.addEventListener('click', closeNav);
+			});
+		</script>
+	</body>
+</html>
